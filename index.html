@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="center">
+  <div class="card login">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="error"></p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" style="display:none;">
+  <h1>📜 Project Dashboard</h1>
+
+  <div class="top-bar">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Create Project -->
+  <div class="card">
+    <input type="text" id="projectName" placeholder="Project Name">
+    <button onclick="addProject()">Create Project</button>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="card">
+    <input type="text" id="search" placeholder="Search tasks..." onkeyup="displayProjects()">
+
+    <select id="filterStatus" onchange="displayProjects()">
+      <option value="">All Status</option>
+      <option>Pending</option>
+      <option>In Progress</option>
+      <option>Completed</option>
+    </select>
+  </div>
+
+  <div id="projects"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

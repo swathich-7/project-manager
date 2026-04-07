@@ -1,0 +1,111 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #764ba2, #71d5eb, #764ba2);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 20px;
+  margin: 10px auto;
+  border-radius: 12px;
+  max-width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Login */
+.login {
+  flex-direction: column;
+  width: 300px;
+}
+
+/* Inputs */
+input, select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+
+/* Buttons */
+button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  background: #0e30c8;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* Project */
+.project {
+  background: white;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 12px;
+  max-width: 800px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Task */
+.task {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9fafc;
+  border-left: 6px solid gray;
+}
+
+/* Priority Colors */
+.high { border-color: #e53e3e; }
+.medium { border-color: #dd6b20; }
+.low { border-color: #38a169; }
+
+/* Completed */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Error */
+#error {
+  color: red;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+  }
+}

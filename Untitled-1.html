@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student Task Manager</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    /* Input section */
+    .input-box {
+      margin: 20px auto;
+    }
+
+    input, select {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    /* Task list */
+    #taskList {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    #taskList li {
+      background: white;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Priority colors */
+    .high { border-left: 5px solid red; }
+    .medium { border-left: 5px solid orange; }
+    .low { border-left: 5px solid green; }
+
+    /* Delete button */
+    .delete-btn {
+      background: red;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .delete-btn:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Student Task Manager</h1>
+
+<!-- Input section -->
+<div class="input-box">
+  <input type="text" id="taskName" placeholder="Task Name">
+  <input type="text" id="subject" placeholder="Subject">
+
+  <select id="priority">
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
+  </select>
+
+  <select id="status">
+    <option value="pending">Pending</option>
+    <option value="completed">Completed</option>
+  </select>
+
+  <button onclick="addTask()">Add Task</button>
+</div>
+
+<button onclick="displayTasks()">Show Tasks</button>
+<button onclick="showHighPriorityTasks()">High Priority</button>
+<button onclick="countTasks()">Task Count</button>
+
+<h2>Task List</h2>
+<ul id="taskList"></ul>
+
+<script>
+
+let tasks = [
+  { taskName: "Coding practice", sub: "web dev", priority: "High", status: "pending" },
+  { taskName: "Major project", sub: "web dev", priority: "High", status: "pending" },
+  { taskName: "Minor project", sub: "web dev", priority: "Medium", status: "completed" }
+];
+
+// Display tasks
+function displayTasks() {
+  let list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  tasks.forEach((task, index) => {
+    let li = document.createElement("li");
+
+    li.classList.add(task.priority.toLowerCase());
+
+    li.innerHTML = `
+      <span>
+        ${task.taskName} - ${task.sub} 
+        (${task.priority} | ${task.status})
+      </span>
+      <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+    `;
+
+    list.appendChild(li);
+  });
+}
+
+// Add new task
+function addTask() {
+  let name = document.getElementById("taskName").value;
+  let sub = document.getElementById("subject").value;
+  let priority = document.getElementById("priority").value;
+  let status = document.getElementById("status").value;
+
+  if (name === "" || sub === "") {
+    alert("Please fill all fields");
+    return;
+  }
+
+  tasks.push({ taskName: name, sub: sub, priority: priority, status: status });
+
+  displayTasks();
+
+  // clear inputs
+  document.getElementById("taskName").value = "";
+  document.getElementById("subject").value = "";
+}
+
+// Delete task
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  displayTasks();
+}
+
+// Show only high priority
+function showHighPriorityTasks() {
+  let list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  tasks.forEach((task, index) => {
+    if (task.priority === "High") {
+      let li = document.createElement("li");
+
+      li.classList.add("high");
+
+      li.innerHTML = `
+        <span>${task.taskName} - ${task.sub}</span>
+        <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+      `;
+
+      list.appendChild(li);
+    }
+  });
+}
+
+// Count tasks
+function countTasks() {
+  let total = tasks.length;
+  let completed = tasks.filter(t => t.status === "completed").length;
+  let pending = total - completed;
+
+  alert(`Total: ${total}\nCompleted: ${completed}\nPending: ${pending}`);
+}
+
+</script>
+
+</body>
+</html>
